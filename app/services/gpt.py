@@ -1,4 +1,3 @@
-
 """
 Сервис для работы с GPT API
 """
@@ -11,50 +10,50 @@ class GPTService:
     def __init__(self, api_key: str):
         """Инициализация сервиса GPT"""
         self.client = openai.AsyncOpenAI(api_key=api_key)
-    
+
     async def generate_response(self, prompt: str, system_prompt: str = None) -> Optional[str]:
         """
         Генерация ответа через GPT
-        
+
         Args:
             prompt: Пользовательский запрос
             system_prompt: Системный промпт
-            
+
         Returns:
             Ответ от GPT или None в случае ошибки
         """
         try:
             messages = []
-            
+
             if system_prompt:
                 messages.append({"role": "system", "content": system_prompt})
-            
+
             messages.append({"role": "user", "content": prompt})
-            
+
             import os
             model = os.getenv("OPENAI_MODEL", "gpt-4o")
-            
+
             response = await self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 max_tokens=1000,
                 temperature=0.7
             )
-            
+
             return response.choices[0].message.content.strip()
-            
+
         except Exception as e:
             print(f"Ошибка при обращении к GPT: {e}")
             return None
-    
+
     async def evaluate_response(self, response: str, evaluation_prompt: str) -> Optional[str]:
         """
         Оценка качества ответа
-        
+
         Args:
             response: Ответ для оценки
             evaluation_prompt: Промпт для оценки
-            
+
         Returns:
             Оценка от GPT или None в случае ошибки
         """
@@ -73,5 +72,5 @@ async def get_gpt_response(prompt: str, system_prompt: str = None) -> Optional[s
     """Удобная функция для получения ответа от GPT"""
     if not gpt_service:
         raise ValueError("GPT сервис не инициализирован. Вызовите initialize_gpt_service() сначала.")
-    
+
     return await gpt_service.generate_response(prompt, system_prompt)

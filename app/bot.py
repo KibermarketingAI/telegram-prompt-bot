@@ -9,6 +9,7 @@ import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from .services.gpt import initialize_gpt_service, get_gpt_response
+import os
 
 # Настройка логирования
 logging.basicConfig(
@@ -23,6 +24,15 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")
 
+def load_system_prompt() -> str:
+    """Загрузка системного промпта из файла"""
+    try:
+        with open("app/prompts/base_ru.txt", "r", encoding="utf-8") as file:
+            return file.read().strip()
+    except FileNotFoundError:
+        logger.error("Файл системного промпта не найден!")
+        return ""
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Команда /start"""
     await update.message.reply_text('Привет! Я готов помочь вам.')
@@ -33,8 +43,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     logger.info(f"Получено сообщение: {user_message}")
     
     try:
-        # Получение ответа от GPT
-        response = await get_gpt_response(user_message)
+        # Загрузка системного промпта
+        system_prompt = load_system_prompt()
+        
+        # Получение ответа от GPT с системным промптом
+        response = await get_gpt_response(user_message, system_prompt)
         if response:
             await update.message.reply_text(response)
         else:
