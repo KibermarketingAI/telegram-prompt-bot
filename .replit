@@ -1,14 +1,15 @@
+entrypoint = "main.py"
+modules = ["python-3.11"]
 
-run = "python main.py"
+[nix]
+channel = "stable-24_05"
 
-[workflows]
-runButton = "Run Bot"
+[unitTest]
+language = "python3"
 
-[[workflows.workflow]]
-name = "Run Bot"
-author = 43982677
-mode = "sequential"
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix"]
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python main.py"
+[deployment]
+run = ["python3", "main.py"]
+deploymentTarget = "cloudrun"
