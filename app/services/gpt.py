@@ -31,8 +31,11 @@ class GPTService:
             
             messages.append({"role": "user", "content": prompt})
             
+            import os
+            model = os.getenv("OPENAI_MODEL", "gpt-4o")
+            
             response = await self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model=model,
                 messages=messages,
                 max_tokens=1000,
                 temperature=0.7

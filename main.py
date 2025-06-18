@@ -4,9 +4,11 @@
 Main application entry point
 """
 
+from app.bot import main as bot_main
+
 def main():
-    print("Application starting...")
-    # Your main application logic here
+    print("Starting Telegram bot...")
+    bot_main()
     
 if __name__ == "__main__":
     main()

@@ -5,8 +5,10 @@
 
 import asyncio
 import logging
+import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+from .services.gpt import initialize_gpt_service, get_gpt_response
 
 # Настройка логирования
 logging.basicConfig(
@@ -15,8 +17,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Токен бота (установите в Secrets)
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+# Получение токенов из секретов
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
+CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Команда /start"""
@@ -27,12 +32,31 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     user_message = update.message.text
     logger.info(f"Получено сообщение: {user_message}")
     
-    # Здесь будет логика обработки сообщений через GPT
-    response = f"Вы написали: {user_message}"
-    await update.message.reply_text(response)
+    try:
+        # Получение ответа от GPT
+        response = await get_gpt_response(user_message)
+        if response:
+            await update.message.reply_text(response)
+        else:
+            await update.message.reply_text("Извините, произошла ошибка при обработке вашего сообщения.")
+    except Exception as e:
+        logger.error(f"Ошибка при обработке сообщения: {e}")
+        await update.message.reply_text("Извините, произошла ошибка при обработке вашего сообщения.")
 
 def main() -> None:
     """Главная функция запуска бота"""
+    # Проверка наличия необходимых токенов
+    if not BOT_TOKEN:
+        logger.error("BOT_TOKEN не найден в секретах!")
+        return
+    
+    if not OPENAI_API_KEY:
+        logger.error("OPENAI_API_KEY не найден в секретах!")
+        return
+    
+    # Инициализация GPT сервиса
+    initialize_gpt_service(OPENAI_API_KEY)
+    
     # Создание приложения
     application = Application.builder().token(BOT_TOKEN).build()
     
