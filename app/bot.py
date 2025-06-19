@@ -155,6 +155,9 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if "Evaluation" in parsed:
         parsed = parsed["Evaluation"]
 
+    # Сохраняем данные оценки в context.user_data
+    context.user_data['evaluation_data'] = parsed
+
     # Формируем текст
     text_parts = []
     for key, val in parsed.items():
@@ -171,7 +174,7 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"🛠 Можно улучшить: {improvement}"
             )
             text_parts.append(block)
-    
+
     total_score = parsed.get("Total Score") or parsed.get("total_score")
     if total_score:
         text_parts.append(f"\n<b>Общая оценка промпта:</b> <b>{total_score}/75</b>")
@@ -185,7 +188,7 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # Сначала отвечаем на callback query
     await update.callback_query.answer()
-    
+
     logger.info("Отправляем результат пользователю")
     # Затем отправляем сообщение
     await update.callback_query.message.reply_text(
@@ -218,6 +221,57 @@ async def improve_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+async def refine_prompt_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    prompt = context.user_data.get('generated_prompt')
+    evaluation_data = context.user_data.get('evaluation_data')
+
+    if not prompt:
+        await update.callback_query.answer("Сначала отправьте задачу", show_alert=True)
+        return
+
+    # Отвечаем на callback query
+    await update.callback_query.answer()
+
+    # Формируем детальные рекомендации на основе оценки
+    improvements = []
+    if evaluation_data:
+        for key, val in evaluation_data.items():
+            if isinstance(val, dict):
+                score = val.get("Score", 0)
+                improvement = val.get("Improvement", "")
+                if score < 5 and improvement and improvement != "Нет":
+                    improvements.append(f"• {key}: {improvement}")
+
+    improvement_text = "\n".join(improvements) if improvements else "Общее улучшение всех аспектов промпта"
+
+    refine_prompt = f"""
+Ты Senior Prompt Engineer. Улучши промпт, исправив конкретные недостатки из оценки.
+
+ИСХОДНЫЙ ПРОМПТ:
+{prompt}
+
+КОНКРЕТНЫЕ УЛУЧШЕНИЯ (исправь эти моменты):
+{improvement_text}
+
+ЗАДАЧА: Создай улучшенную версию промпта, которая:
+- Сохраняет оригинальную цель и суть
+- Исправляет все указанные недостатки
+- Готова к использованию без доработок
+
+Верни ТОЛЬКО улучшенный промпт без пояснений.
+"""
+
+    result = await get_gpt_response(refine_prompt, system_prompt="Ты Senior Prompt Engineer.")
+
+    # Сохраняем улучшенный промпт
+    context.user_data['improved_prompt'] = result
+
+    await update.callback_query.message.reply_text(
+        f"<b>🎯 Идеальный промпт:</b>\n\n<code>{result}</code>",
+        parse_mode="HTML"
+    )
+
+
 def main():
     if not BOT_TOKEN or not OPENAI_API_KEY:
         logger.error("Нет BOT_TOKEN или OPENAI_API_KEY в переменных окружения!")
@@ -231,7 +285,7 @@ def main():
     app.add_handler(CallbackQueryHandler(check_sub_callback, pattern="check_sub"))
     app.add_handler(CallbackQueryHandler(evaluate_callback, pattern="evaluate"))
     app.add_handler(CallbackQueryHandler(improve_callback, pattern="improve"))
-    app.add_handler(CallbackQueryHandler(improve_callback, pattern="refine_prompt"))
+    app.add_handler(CallbackQueryHandler(refine_prompt_callback, pattern="refine_prompt"))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
     logger.info("Бот запущен!")
