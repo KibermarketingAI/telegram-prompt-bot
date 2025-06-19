@@ -2,3 +2,6 @@ aiogram==3.2.0
 openai>=1.15.0
 python-dotenv
 pydantic==1.10.13
+git add requirements.txt
+git commit -m "fix: pin compatible pydantic version"
+git push
