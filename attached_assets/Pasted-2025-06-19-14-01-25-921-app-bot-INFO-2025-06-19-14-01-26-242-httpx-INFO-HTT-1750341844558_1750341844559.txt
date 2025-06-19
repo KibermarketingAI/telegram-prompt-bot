@@ -1,0 +1,45 @@
+2025-06-19 14:01:25,921 - app.bot - INFO - Бот запущен!
+2025-06-19 14:01:26,242 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getMe "HTTP/1.1 200 OK"
+2025-06-19 14:01:26,349 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/deleteWebhook "HTTP/1.1 200 OK"
+2025-06-19 14:01:26,351 - telegram.ext.Application - INFO - Application started
+2025-06-19 14:01:36,665 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:01:45,722 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:01:45,723 - app.bot - INFO - /start вызван пользователем 473066783
+2025-06-19 14:01:46,041 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getChatMember "HTTP/1.1 200 OK"
+2025-06-19 14:01:46,183 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/sendMessage "HTTP/1.1 200 OK"
+2025-06-19 14:01:48,595 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:01:48,596 - app.bot - INFO - Загружен системный промпт длиной 1572 символов
+2025-06-19 14:01:57,770 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-19 14:01:58,193 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/sendMessage "HTTP/1.1 200 OK"
+2025-06-19 14:01:58,913 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:02:00,541 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:02:09,625 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-19 14:02:09,644 - app.bot - WARNING - RAW GPT OUTPUT:
+{
+  "1. Ясность и конкретность": {"Score": 4, "Strength": "Понятное задание", "Improvement": "Уточнить длину поста"},
+  "2. Указание контекста / фона": {"Score": 4, "Strength": "Указан контекст", "Improvement": "Добавить больше фона"},
+  "3. Чёткое описание задачи": {"Score": 5, "Strength": "Задача ясна", "Improvement": "Нет"},
+  "4. Желаемый формат / стиль результата": {"Score": 3, "Strength": "Указан стиль", "Improvement": "Уточнить формат"},
+  "5. Логика и структура инструкций": {"Score": 4, "Strength": "Логичная структура", "Improvement": "Упростить шаги"},
+  "6. Использование роли или персоны": {"Score": 5, "Strength": "Указана роль", "Improvement": "Нет"},
+  "7. Примеры или демонстрации": {"Score": 3, "Strength": "Пример есть", "Improvement": "Добавить больше примеров"},
+  "8. Поощрение пошагового мышления": {"Score": 4, "Strength": "Последовательность задана", "Improvement": "Уточнить шаги"},
+  "9. Отсутствие неоднозначностей или противоречий": {"Score": 4, "Strength": "Нет противоречий", "Improvement": "Уточнить детали"},
+  "10. Потенциал доработки / итерации": {"Score": 4, "Strength": "Есть потенциал", "Improvement": "Больше итераций"},
+  "11. Соответствие модели и ситуации": {"Score": 4, "Strength": "Соответствует задаче", "Improvement": "Уточнить требования"},
+  "12. Баланс между краткостью и детализацией": {"Score": 3, "Strength": "Краткий", "Improvement": "Добавить детали"},
+  "13. Указание целевой аудитории": {"Score": 4, "Strength": "Указана целевая аудитория", "Improvement": "Уточнить аудиторию"},
+  "14. Структурированность / нумерация": {"Score": 3, "Strength": "Некоторая структура", "Improvement": "Добавить нумерацию"},
+  "15. Реалистичность в рамках ограничений модели": {"Score": 4, "Strength": "Реалистично", "Improvement": "Уточнить ограничения"},
+  "Total Score": 62
+}
+2025-06-19 14:02:10,650 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:02:20,757 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:02:30,865 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:02:40,971 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:02:51,077 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:03:01,182 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:03:11,288 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:03:21,398 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:03:31,504 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:03:41,610 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
