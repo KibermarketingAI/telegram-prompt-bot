@@ -194,11 +194,6 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=keyboard
     )
 
-    except Exception as e:
-        logger.error(f"Ошибка разбора JSON: {e}\nОтвет GPT:\n{raw_result}")
-        await update.callback_query.answer()
-        await update.callback_query.message.reply_text("Ошибка при разборе оценки. Попробуй ещё раз.")
-
 
 async def improve_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     prompt = context.user_data.get('generated_prompt')
