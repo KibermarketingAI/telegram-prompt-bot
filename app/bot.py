@@ -131,6 +131,7 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         # Пробуем парсить JSON
         parsed = json.loads(cleaned)
+        logger.info("JSON успешно распарсен")
     except json.JSONDecodeError:
         # Если JSON неполный, пытаемся его "починить"
         if not cleaned.endswith('}'):
@@ -138,6 +139,7 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             cleaned += '", "Improvement": "Требует доработки"}, "Total Score": 45}'
             try:
                 parsed = json.loads(cleaned)
+                logger.info("JSON починен и распарсен")
             except:
                 logger.error(f"Не удалось починить JSON: {cleaned}")
                 await update.callback_query.answer()
@@ -149,46 +151,48 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.callback_query.message.reply_text("Ошибка при разборе оценки. Попробуй ещё раз.")
             return
 
-        # Извлекаем, если есть ключ 'Evaluation'
-        if "Evaluation" in parsed:
-            parsed = parsed["Evaluation"]
+    # Извлекаем, если есть ключ 'Evaluation'
+    if "Evaluation" in parsed:
+        parsed = parsed["Evaluation"]
 
-        # Формируем текст
-        text_parts = []
-        for key, val in parsed.items():
-            if isinstance(val, dict):
-                name = key
-                score = val.get("Score") or val.get("score", "—")
-                strength = (val.get("Strength") or val.get("strength", "")).replace("<br>", "\n")
-                improvement = (val.get("Improvement") or val.get("improvement", "")).replace("<br>", "\n")
+    # Формируем текст
+    text_parts = []
+    for key, val in parsed.items():
+        if isinstance(val, dict):
+            name = key
+            score = val.get("Score") or val.get("score", "—")
+            strength = (val.get("Strength") or val.get("strength", "")).replace("<br>", "\n")
+            improvement = (val.get("Improvement") or val.get("improvement", "")).replace("<br>", "\n")
 
-                block = (
-                    f"<b>{name}</b>\n"
-                    f"⭐️ Оценка: <b>{score}/5</b>\n"
-                    f"✅ Сильная сторона: {strength}\n"
-                    f"🛠 Можно улучшить: {improvement}"
-                )
-                text_parts.append(block)
-        total_score = parsed.get("Total Score") or parsed.get("total_score")
-        if total_score:
-            text_parts.append(f"\n<b>Общая оценка промпта:</b> <b>{total_score}/75</b>")
+            block = (
+                f"<b>{name}</b>\n"
+                f"⭐️ Оценка: <b>{score}/5</b>\n"
+                f"✅ Сильная сторона: {strength}\n"
+                f"🛠 Можно улучшить: {improvement}"
+            )
+            text_parts.append(block)
+    
+    total_score = parsed.get("Total Score") or parsed.get("total_score")
+    if total_score:
+        text_parts.append(f"\n<b>Общая оценка промпта:</b> <b>{total_score}/75</b>")
 
-        final_text = "<b>Оценка промпта по критериям:</b>\n\n" + "\n\n".join(text_parts)
+    final_text = "<b>Оценка промпта по критериям:</b>\n\n" + "\n\n".join(text_parts)
 
-        # Кнопка "Сделать промпт идеальным"
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("Сделать промпт идеальным", callback_data="refine_prompt")]
-        ])
+    # Кнопка "Сделать промпт идеальным"
+    keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("Сделать промпт идеальным", callback_data="refine_prompt")]
+    ])
 
-        # Сначала отвечаем на callback query
-        await update.callback_query.answer()
-        
-        # Затем отправляем сообщение
-        await update.callback_query.message.reply_text(
-            final_text,
-            parse_mode="HTML",
-            reply_markup=keyboard
-        )
+    # Сначала отвечаем на callback query
+    await update.callback_query.answer()
+    
+    logger.info("Отправляем результат пользователю")
+    # Затем отправляем сообщение
+    await update.callback_query.message.reply_text(
+        final_text,
+        parse_mode="HTML",
+        reply_markup=keyboard
+    )
 
     except Exception as e:
         logger.error(f"Ошибка разбора JSON: {e}\nОтвет GPT:\n{raw_result}")
