@@ -140,10 +140,12 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 parsed = json.loads(cleaned)
             except:
                 logger.error(f"Не удалось починить JSON: {cleaned}")
+                await update.callback_query.answer()
                 await update.callback_query.message.reply_text("Ошибка при разборе оценки. Попробуй ещё раз.")
                 return
         else:
             logger.error(f"JSON синтаксически неверен: {cleaned}")
+            await update.callback_query.answer()
             await update.callback_query.message.reply_text("Ошибка при разборе оценки. Попробуй ещё раз.")
             return
 
@@ -178,6 +180,10 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("Сделать промпт идеальным", callback_data="refine_prompt")]
         ])
 
+        # Сначала отвечаем на callback query
+        await update.callback_query.answer()
+        
+        # Затем отправляем сообщение
         await update.callback_query.message.reply_text(
             final_text,
             parse_mode="HTML",
@@ -186,6 +192,7 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     except Exception as e:
         logger.error(f"Ошибка разбора JSON: {e}\nОтвет GPT:\n{raw_result}")
+        await update.callback_query.answer()
         await update.callback_query.message.reply_text("Ошибка при разборе оценки. Попробуй ещё раз.")
 
 
@@ -194,6 +201,9 @@ async def improve_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not prompt:
         await update.callback_query.answer("Сначала отправьте задачу", show_alert=True)
         return
+
+    # Отвечаем на callback query
+    await update.callback_query.answer()
 
     improve_prompt = f"""
 Ты Senior Prompt Engineer. Улучши следующий промпт по всем 15 критериям оценки качества. 
