@@ -164,22 +164,13 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if isinstance(val, dict):
             name = key
             score = val.get("Score") or val.get("score", "—")
-            strength = (val.get("Strength") or val.get("strength", "")).replace("<br>", "\n")
-            improvement = (val.get("Improvement") or val.get("improvement", "")).replace("<br>", "\n")
-
-            block = (
-                f"<b>{name}</b>\n"
-                f"⭐️ Оценка: <b>{score}/5</b>\n"
-                f"✅ Сильная сторона: {strength}\n"
-                f"🛠 Можно улучшить: {improvement}"
-            )
-            text_parts.append(block)
+            text_parts.append(f"<b>{name}</b>: <b>{score}/5</b>")
 
     total_score = parsed.get("Total Score") or parsed.get("total_score")
     if total_score:
         text_parts.append(f"\n<b>Общая оценка промпта:</b> <b>{total_score}/75</b>")
 
-    final_text = "<b>Оценка промпта по критериям:</b>\n\n" + "\n\n".join(text_parts)
+    final_text = "<b>Оценка промпта по критериям:</b>\n\n" + "\n".join(text_parts)
 
     # Сохраняем результаты оценки для функции refine_prompt_callback
     context.user_data['last_evaluation'] = final_text
