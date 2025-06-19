@@ -3,18 +3,11 @@ services:
   - type: worker
     name: telegram-prompt-bot
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python main.py
-    pythonVersion: 3.11.8
-services:
-  - type: worker
-    name: telegram-prompt-bot
-    env: python
-    plan: starter
     runtime: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python app/bot.py"
+    plan: starter
     region: oregon
     branch: main
     repo: https://github.com/KibermarketingAI/telegram-prompt-bot
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app/bot.py
     pythonVersion: 3.11.8
