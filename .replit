@@ -5,7 +5,7 @@ modules = ["python-3.11"]
 language = "python3"
 
 [deployment]
-run = ["python", "main.py"]
+run = ["sh", "-c", "python main.py"]
 deploymentTarget = "cloudrun"
 
 [interpreter]

@@ -1,0 +1,177 @@
+All logs
+Search
+Search
+
+Live tail
+GMT+3
+
+Menu
+==> Cloning from https://github.com/KibermarketingAI/telegram-prompt-bot
+==> Checking out commit 4818b1023584c03f221c70785a348a1ab3d33ab8 in branch main
+==> Downloading cache...
+==> Using Python version 3.13.4 (default)
+==> Docs on specifying a Python version: https://render.com/docs/python-version
+==> Transferred 87MB in 8s. Extraction took 3s.
+==> Using Poetry version 2.1.3 (default)
+==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+==> Using UV version 0.7.12 (default)
+==> Docs on specifying a UV version: [https://render.com/docs/uv-version](https://render.com/docs/uv-version)
+==> Running build command 'pip install -r requirements.txt'...
+Collecting python-telegram-bot==20.8 (from -r requirements.txt (line 1))
+  Using cached python_telegram_bot-20.8-py3-none-any.whl.metadata (15 kB)
+Collecting openai>=1.15.0 (from -r requirements.txt (line 2))
+  Using cached openai-1.88.0-py3-none-any.whl.metadata (25 kB)
+Collecting python-dotenv (from -r requirements.txt (line 3))
+  Using cached python_dotenv-1.1.0-py3-none-any.whl.metadata (24 kB)
+Collecting pydantic>=2.8.0 (from -r requirements.txt (line 4))
+  Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
+Collecting httpx~=0.26.0 (from python-telegram-bot==20.8->-r requirements.txt (line 1))
+  Using cached httpx-0.26.0-py3-none-any.whl.metadata (7.6 kB)
+Collecting anyio (from httpx~=0.26.0->python-telegram-bot==20.8->-r requirements.txt (line 1))
+  Using cached anyio-4.9.0-py3-none-any.whl.metadata (4.7 kB)
+Collecting certifi (from httpx~=0.26.0->python-telegram-bot==20.8->-r requirements.txt (line 1))
+  Using cached certifi-2025.6.15-py3-none-any.whl.metadata (2.4 kB)
+Collecting httpcore==1.* (from httpx~=0.26.0->python-telegram-bot==20.8->-r requirements.txt (line 1))
+  Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx~=0.26.0->python-telegram-bot==20.8->-r requirements.txt (line 1))
+  Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)
+Collecting sniffio (from httpx~=0.26.0->python-telegram-bot==20.8->-r requirements.txt (line 1))
+  Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx~=0.26.0->python-telegram-bot==20.8->-r requirements.txt (line 1))
+  Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting distro<2,>=1.7.0 (from openai>=1.15.0->-r requirements.txt (line 2))
+  Using cached distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting jiter<1,>=0.4.0 (from openai>=1.15.0->-r requirements.txt (line 2))
+  Using cached jiter-0.10.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.2 kB)
+Collecting tqdm>4 (from openai>=1.15.0->-r requirements.txt (line 2))
+  Using cached tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Collecting typing-extensions<5,>=4.11 (from openai>=1.15.0->-r requirements.txt (line 2))
+  Using cached typing_extensions-4.14.0-py3-none-any.whl.metadata (3.0 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2.8.0->-r requirements.txt (line 4))
+  Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.33.2 (from pydantic>=2.8.0->-r requirements.txt (line 4))
+  Downloading pydantic_core-2.33.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+Collecting typing-inspection>=0.4.0 (from pydantic>=2.8.0->-r requirements.txt (line 4))
+  Downloading typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
+Using cached python_telegram_bot-20.8-py3-none-any.whl (604 kB)
+Using cached httpx-0.26.0-py3-none-any.whl (75 kB)
+Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+Using cached openai-1.88.0-py3-none-any.whl (734 kB)
+Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
+Downloading pydantic_core-2.33.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 15.4 MB/s eta 0:00:00
+Using cached anyio-4.9.0-py3-none-any.whl (100 kB)
+Using cached distro-1.9.0-py3-none-any.whl (20 kB)
+Using cached jiter-0.10.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (350 kB)
+Using cached typing_extensions-4.14.0-py3-none-any.whl (43 kB)
+Using cached python_dotenv-1.1.0-py3-none-any.whl (20 kB)
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+Using cached idna-3.10-py3-none-any.whl (70 kB)
+Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
+Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+Using cached certifi-2025.6.15-py3-none-any.whl (157 kB)
+Installing collected packages: typing-extensions, tqdm, sniffio, python-dotenv, jiter, idna, h11, distro, certifi, annotated-types, typing-inspection, pydantic-core, httpcore, anyio, pydantic, httpx, python-telegram-bot, openai
+Successfully installed annotated-types-0.7.0 anyio-4.9.0 certifi-2025.6.15 distro-1.9.0 h11-0.16.0 httpcore-1.0.9 httpx-0.26.0 idna-3.10 jiter-0.10.0 openai-1.88.0 pydantic-2.11.7 pydantic-core-2.33.2 python-dotenv-1.1.0 python-telegram-bot-20.8 sniffio-1.3.1 tqdm-4.67.1 typing-extensions-4.14.0 typing-inspection-0.4.1
+==> Uploading build...
+==> Uploaded in 5.0s. Compression took 2.1s
+==> Build successful 🎉
+==> Deploying...
+==> Your service is live 🎉
+==> 
+==> ///////////////////////////////////////////////////////////
+==> 
+==> Available at your primary URL 
+==> 
+==> ///////////////////////////////////////////////////////////
+==> Running 'python -m app.bot'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/render/project/src/app/bot.py", line 289, in <module>
+    main()
+    ~~~~^^
+  File "/opt/render/project/src/app/bot.py", line 275, in main
+    app = Application.builder().token(BOT_TOKEN).build()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_applicationbuilder.py", line 312, in build
+    updater = Updater(bot=bot, update_queue=update_queue)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_updater.py", line 128, in __init__
+    self.__polling_cleanup_cb: Optional[Callable[[], Coroutine[Any, Any, None]]] = None
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Updater' object has no attribute '_Updater__polling_cleanup_cb' and no __dict__ for setting new attributes
+==> Running 'python -m app.bot'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/render/project/src/app/bot.py", line 289, in <module>
+    main()
+    ~~~~^^
+  File "/opt/render/project/src/app/bot.py", line 275, in main
+    app = Application.builder().token(BOT_TOKEN).build()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_applicationbuilder.py", line 312, in build
+    updater = Updater(bot=bot, update_queue=update_queue)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_updater.py", line 128, in __init__
+    self.__polling_cleanup_cb: Optional[Callable[[], Coroutine[Any, Any, None]]] = None
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Updater' object has no attribute '_Updater__polling_cleanup_cb' and no __dict__ for setting new attributes
+==> Running 'python -m app.bot'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/render/project/src/app/bot.py", line 289, in <module>
+    main()
+    ~~~~^^
+  File "/opt/render/project/src/app/bot.py", line 275, in main
+    app = Application.builder().token(BOT_TOKEN).build()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_applicationbuilder.py", line 312, in build
+    updater = Updater(bot=bot, update_queue=update_queue)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_updater.py", line 128, in __init__
+    self.__polling_cleanup_cb: Optional[Callable[[], Coroutine[Any, Any, None]]] = None
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Updater' object has no attribute '_Updater__polling_cleanup_cb' and no __dict__ for setting new attributes
+==> Running 'python -m app.bot'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/render/project/src/app/bot.py", line 289, in <module>
+    main()
+    ~~~~^^
+  File "/opt/render/project/src/app/bot.py", line 275, in main
+    app = Application.builder().token(BOT_TOKEN).build()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_applicationbuilder.py", line 312, in build
+    updater = Updater(bot=bot, update_queue=update_queue)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_updater.py", line 128, in __init__
+    self.__polling_cleanup_cb: Optional[Callable[[], Coroutine[Any, Any, None]]] = None
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Updater' object has no attribute '_Updater__polling_cleanup_cb' and no __dict__ for setting new attributes
+==> Running 'python -m app.bot'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/render/project/src/app/bot.py", line 289, in <module>
+    main()
+    ~~~~^^
+  File "/opt/render/project/src/app/bot.py", line 275, in main
+    app = Application.builder().token(BOT_TOKEN).build()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_applicationbuilder.py", line 312, in build
+    updater = Updater(bot=bot, update_queue=update_queue)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_updater.py", line 128, in __init__
+    self.__polling_cleanup_cb: Optional[Callable[[], Coroutine[Any, Any, None]]] = None
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Updater' object has no attribute '_Updater__polling_cleanup_cb' and no __dict__ for setting new attributes
+==> Running 'python -m app.bot'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/render/project/src/app/bot.py", line 289, in <module>
+    main()
+    ~~~~^^
+  File "/opt/render/project/src/app/bot.py", line 275, in main
+    app = Application.builder().token(BOT_TOKEN).build()
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_applicationbuilder.py", line 312, in build
+    updater = Updater(bot=bot, update_queue=update_queue)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/telegram/ext/_updater.py", line 128, in __init__
+    self.__polling_cleanup_cb: Optional[Callable[[], Coroutine[Any, Any, None]]] = None
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Updater' object has no attribute '_Updater__polling_cleanup_cb' and no __dict__ for setting new attributes
