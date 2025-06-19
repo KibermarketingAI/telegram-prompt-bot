@@ -1,5 +1,5 @@
 
-python-telegram-bot==20.7
+python-telegram-bot==20.8
 openai>=1.15.0
 python-dotenv
 pydantic==1.10.13
