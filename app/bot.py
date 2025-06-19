@@ -181,6 +181,9 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     final_text = "<b>Оценка промпта по критериям:</b>\n\n" + "\n\n".join(text_parts)
 
+    # Сохраняем результаты оценки для функции refine_prompt_callback
+    context.user_data['last_evaluation'] = final_text
+
     # Кнопка "Сделать промпт идеальным"
     keyboard = InlineKeyboardMarkup([
         [InlineKeyboardButton("Сделать промпт идеальным", callback_data="refine_prompt")]
