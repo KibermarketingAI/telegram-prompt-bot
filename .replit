@@ -12,3 +12,15 @@ deploymentTarget = "cloudrun"
 command = ["python"]
 
 [nix]
+
+[workflows]
+runButton = "Run Bot"
+
+[[workflows.workflow]]
+name = "Run Bot"
+author = 43982677
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python app/main.py"

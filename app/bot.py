@@ -6,7 +6,7 @@ import os
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import (Application, CommandHandler, MessageHandler,
                           CallbackQueryHandler, ContextTypes, filters)
-from services.gpt import initialize_gpt_service, get_gpt_response
+from app.services.gpt import initialize_gpt_service, get_gpt_response
 
 # Логирование
 logging.basicConfig(
