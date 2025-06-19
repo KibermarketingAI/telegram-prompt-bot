@@ -46,7 +46,7 @@ async def check_subscription(user_id, context):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(f"/start вызван пользователем {update.effective_user.id}")
-    
+
     user_id = update.effective_user.id
     if not await check_subscription(user_id, context):
         buttons = [[InlineKeyboardButton("✅ Подписаться", url=f"https://t.me/{CHANNEL_USERNAME.strip('@')}")],
@@ -74,8 +74,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if not base_prompt:
         await update.message.reply_text("⚠️ Ошибка: системный промпт не загружен.")
-        
         return
+
     result = await get_gpt_response(task, base_prompt)
     context.user_data['generated_prompt'] = result
 
@@ -87,14 +87,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                     reply_markup=markup, parse_mode="HTML")
 
 
-import re  # в начале файла, если ещё не добавлено
-
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-import json
-import logging
-
-logger = logging.getLogger(__name__)
-
 async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     prompt = context.user_data.get('generated_prompt')
     if not prompt:
@@ -103,21 +95,21 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     eval_prompt = load_prompt(EVAL_PROMPT_PATH).replace("{PROMPT}", prompt)
 
-    raw_result = await get_gpt_response (
+    raw_result = await get_gpt_response(
         eval_prompt,
-    system_prompt = """Ты — эксперт по оценке промптов. Твоя задача — проанализировать промпт по 15 критериям и выдать только один JSON-объект. 
+        system_prompt="""Ты — эксперт по оценке промптов. Твоя задача — проанализировать промпт по 15 критериям и выдать только один JSON-объект. 
 
-    📌 Правила:
-    - Пиши строго на русском языке.
-    - Ответ — только в валидном JSON.
-    - JSON должен начинаться с { и заканчиваться на }.
-    - Должны быть все 15 критериев, каждый с полями: "Score", "Strength", "Improvement", "Justification".
-    - Обязательно включи ключ "Total Score" в конце.
-    - Никаких пояснений вне JSON.
-    - Не используй ```json или другие обрамления.
-    - Каждое значение (Strength, Improvement, Justification) — не длиннее 25 слов.
+📌 Правила:
+- Пиши строго на русском языке.
+- Ответ — только в валидном JSON.
+- JSON должен начинаться с { и заканчиваться на }.
+- Должны быть все 15 критериев, каждый с полями: "Score", "Strength", "Improvement", "Justification".
+- Обязательно включи ключ "Total Score" в конце.
+- Никаких пояснений вне JSON.
+- Не используй ```json или другие обрамления.
+- Каждое значение (Strength, Improvement, Justification) — не длиннее 25 слов.
 
-    Если JSON не влезает — сокращай тексты, но не обрывай JSON и не пропускай критерии."""
+Если JSON не влезает — сокращай тексты, но не обрывай JSON и не пропускай критерии."""
     )
     logger.warning(f"RAW GPT OUTPUT:\n{raw_result}")
 
@@ -185,64 +177,58 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         logger.error(f"Ошибка разбора JSON: {e}\nОтвет GPT:\n{raw_result}")
         await update.callback_query.message.reply_text("Ошибка при разборе оценки. Попробуй ещё раз.")
 
-    from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-    from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, ContextTypes, filters
-    import logging
-    import os
-
-    from .services.gpt import initialize_gpt_service, get_gpt_response
-    from .bot_helpers import start, check_sub_callback, handle_message, evaluate_callback  # если они в отдельных файлах
-
-    # Настройка логирования
-    logging.basicConfig(
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        level=logging.INFO
-    )
-    logger = logging.getLogger(__name__)
-
-    # Переменные окружения
-    BOT_TOKEN = os.getenv("BOT_TOKEN")
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-    # Коллбэк улучшения промпта
 
 async def improve_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-        prompt = context.user_data.get('generated_prompt')
-        if not prompt:
-            await update.callback_query.answer("Сначала отправьте задачу", show_alert=True)
-            return
+    prompt = context.user_data.get('generated_prompt')
+    if not prompt:
+        await update.callback_query.answer("Сначала отправьте задачу", show_alert=True)
+        return
 
-        improve_prompt = f"""
-    Ты Senior Prompt Engineer. Улучши следующий промпт по всем 15 критериям оценки качества. 
-    Верни только улучшенный промпт — без пояснений и без форматирования. Промпт ниже:
+    improve_prompt = f"""
+Ты Senior Prompt Engineer. Улучши следующий промпт по всем 15 критериям оценки качества. 
+Верни только улучшенный промпт — без пояснений и без форматирования. Промпт ниже:
 
-    {prompt}
-    """
+{prompt}
+"""
 
-        result = await get_gpt_response(improve_prompt, system_prompt="Ты Senior Prompt Engineer.")
-        await update.callback_query.message.reply_text(
-            f"<b>Идеальный промпт:</b>\n<code>{result}</code>",
-            parse_mode="HTML"
-        )
+    result = await get_gpt_response(improve_prompt, system_prompt="Ты Senior Prompt Engineer.")
+    await update.callback_query.message.reply_text(
+        f"<b>Идеальный промпт:</b>\n<code>{result}</code>",
+        parse_mode="HTML"
+    )
 
-    # Главная функция запуска бота
+
 def main():
-        if not BOT_TOKEN or not OPENAI_API_KEY:
-            logger.error("Нет BOT_TOKEN или OPENAI_API_KEY в переменных окружения!")
-            return
+    if not BOT_TOKEN or not OPENAI_API_KEY:
+        logger.error("Нет BOT_TOKEN или OPENAI_API_KEY в переменных окружения!")
+        return
 
-        initialize_gpt_service(OPENAI_API_KEY)
+    initialize_gpt_service(OPENAI_API_KEY)
 
-        app = Application.builder().token(BOT_TOKEN).build()
+    app = Application.builder().token(BOT_TOKEN).build()
 
-        app.add_handler(CommandHandler("start", start))
-        app.add_handler(CallbackQueryHandler(check_sub_callback, pattern="check_sub"))
-        app.add_handler(CallbackQueryHandler(evaluate_callback, pattern="evaluate"))
-        app.add_handler(CallbackQueryHandler(improve_callback, pattern="improve"))
-        app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CallbackQueryHandler(check_sub_callback, pattern="check_sub"))
+    app.add_handler(CallbackQueryHandler(evaluate_callback, pattern="evaluate"))
+    app.add_handler(CallbackQueryHandler(improve_callback, pattern="improve"))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-        logger.info("Бот запущен!")
-        app.run_polling()
+    logger.info("Бот запущен!")
+    app.run_polling()
+
 
 if __name__ == '__main__':
-        main()
+    main()
+```json или другие обрамления.
+- Каждое значение (Strength, Improvement, Justification) — не длиннее 25 слов.
+
+Если JSON не влезает — сокращай тексты, но не обрывай JSON и не пропускай критерии."""
+    )
+    logger.warning(f"RAW GPT OUTPUT:\n{raw_result}")
+
+    # Убираем возможные обёртки ```json ... ```
+    cleaned = raw_result.strip()
+    if cleaned.startswith("```json"):
+        cleaned = cleaned.removeprefix("```json").removesuffix("```").strip()
+    elif cleaned.startswith("```"):
+        cleaned = cleaned.removeprefix("```").removesuffix("
