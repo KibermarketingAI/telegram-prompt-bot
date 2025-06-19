@@ -79,11 +79,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     result = await get_gpt_response(task, base_prompt)
     context.user_data['generated_prompt'] = result
 
-    buttons = [[InlineKeyboardButton("🔍 Оценить по 15 критериям", callback_data="evaluate")],
-               [InlineKeyboardButton("💎 Сделать идеальным", callback_data="improve")]]
+    buttons = [[InlineKeyboardButton("🔍 Оценить по 15 критериям", callback_data="evaluate")]]
     markup = InlineKeyboardMarkup(buttons)
 
-    await update.message.reply_text(f"<b>Вот твой промпт:</b>\n<code>{result}</code>\n\nМожешь скопировать его или улучшить:",
+    await update.message.reply_text(f"<b>Вот твой промпт:</b>\n<code>{result}</code>\n\nМожешь скопировать его или оценить:",
                                     reply_markup=markup, parse_mode="HTML")
 
 
@@ -175,9 +174,9 @@ async def evaluate_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Сохраняем результаты оценки для функции refine_prompt_callback
     context.user_data['last_evaluation'] = final_text
 
-    # Кнопка "Сделать промпт идеальным"
+    # Кнопка "Сделать идеальным"
     keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("Сделать промпт идеальным", callback_data="refine_prompt")]
+        [InlineKeyboardButton("💎 Сделать идеальным", callback_data="refine_prompt")]
     ])
 
     # Сначала отвечаем на callback query
