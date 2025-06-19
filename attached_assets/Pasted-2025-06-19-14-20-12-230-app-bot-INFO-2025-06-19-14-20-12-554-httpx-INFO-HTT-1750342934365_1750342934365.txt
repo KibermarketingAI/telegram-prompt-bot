@@ -1,0 +1,113 @@
+2025-06-19 14:20:12,230 - app.bot - INFO - Бот запущен!
+2025-06-19 14:20:12,554 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getMe "HTTP/1.1 200 OK"
+2025-06-19 14:20:12,658 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/deleteWebhook "HTTP/1.1 200 OK"
+2025-06-19 14:20:12,659 - telegram.ext.Application - INFO - Application started
+2025-06-19 14:20:22,970 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:20:33,081 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:20:43,189 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:20:53,295 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:21:03,410 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:21:13,523 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:21:23,630 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:21:33,734 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:21:43,842 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:21:53,953 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
+2025-06-19 14:21:54,058 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_backends/anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "/nix/store/clx0mcir7qw8zk36zbr4jra789g3knf6-python3-3.11.10/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/request/_httpxrequest.py", line 273, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "/nix/store/clx0mcir7qw8zk36zbr4jra789g3knf6-python3-3.11.10/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/ext/_utils/networkloop.py", line 115, in network_retry_loop
+    if not await do_action():
+           ^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/ext/_utils/networkloop.py", line 108, in do_action
+    return action_cb_task.result()
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/ext/_updater.py", line 335, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/ext/_extbot.py", line 669, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/_bot.py", line 4601, in get_updates
+    await self._post(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/_bot.py", line 697, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/ext/_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/_bot.py", line 726, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/request/_baserequest.py", line 197, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/request/_baserequest.py", line 304, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/telegram/request/_httpxrequest.py", line 297, in do_request
+    raise NetworkError(f"httpx.{err.__class__.__name__}: {err}") from err
+telegram.error.NetworkError: httpx.ReadError: 
+2025-06-19 14:22:05,370 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7850700358:AAHbrv4_j_hlArbrv0Hb6LTU9zlh5U8us88/getUpdates "HTTP/1.1 200 OK"
