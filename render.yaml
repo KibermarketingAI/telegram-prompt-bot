@@ -1,0 +1,8 @@
+
+services:
+  - type: worker
+    name: telegram-prompt-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    pythonVersion: 3.11.8
